@@ -7,7 +7,10 @@ import {
   Pressable,
   View,
   TextInput,
-  Button
+  Button,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 import Colors from "../utilities/Colors";
 
@@ -34,50 +37,52 @@ const ComposeModal = ({ handleComposePressed }) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <View style={styles.modalContainer}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            autoComplete="false"
-            autoCapitalize="false"
-            autoCorrect="false"
-            style={styles.textInput}
-            placeholder="Your name"
-            onChangeText={(v) => {
-              setName(v);
-            }}
-          ></TextInput>
-          <TextInput
-            autoComplete="false"
-            autoCapitalize="false"
-            autoCorrect="false"
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.screen}>
+        <View style={styles.modalContainer}>
+          <View style={styles.inputContainer}>
+            <TextInput
+              autoComplete="false"
+              autoCapitalize="false"
+              autoCorrect="false"
+              style={styles.textInput}
+              placeholder="Your name"
+              onChangeText={(v) => {
+                setName(v);
+              }}
+            ></TextInput>
+            <TextInput
+              autoComplete="false"
+              autoCapitalize="false"
+              autoCorrect="false"
+              style={{
+                backgroundColor: "white",
+                height: "70%",
+                maxHeight: "70%",
+                width: "100%",
+                marginTop: 10,
+                borderWidth: 1
+              }}
+              multiline={true}
+              placeholder="Your post"
+              onChangeText={(v) => {
+                setText(v);
+              }}
+            ></TextInput>
+          </View>
+          <View
             style={{
-              backgroundColor: "white",
-              height: "70%",
-              maxHeight: "70%",
-              width: "100%",
-              marginTop: 10,
-              borderWidth: 1
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center"
             }}
-            multiline={true}
-            placeholder="Your post"
-            onChangeText={(v) => {
-              setText(v);
-            }}
-          ></TextInput>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <Button title="Cancel" onPress={handleComposePressed} />
-          <Button title="Post" onPress={handlePostPressed} />
+          >
+            <Button title="Cancel" onPress={handleComposePressed} />
+            <Button title="Post" onPress={handlePostPressed} />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
